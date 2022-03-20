@@ -15,9 +15,17 @@ def init_stage(stage):
 # 4. Any dead cell with 3 neighbors comes alive
 
 def one_generation(stage):
+    stage_snapshot = []
+    # Create snapshot of stage
+    for row in stage:
+        row_copy = []
+        for item in row:
+            row_copy.append(item)
+        stage_snapshot.append(row_copy)
+
     for v_pos in range(len(stage)):
         for h_pos in range(len(stage[v_pos])):
-            neighbors = count_neighbors(stage, v_pos, h_pos)
+            neighbors = count_neighbors(stage_snapshot, v_pos, h_pos)
             if not stage[v_pos][h_pos] and neighbors == 3:
                 stage[v_pos][h_pos] = True
             elif stage[v_pos][h_pos] and neighbors < 2:
